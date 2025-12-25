@@ -1,0 +1,55 @@
+# Render Deployment Configuration
+# Telegram Forward Bot - Production Deployment
+
+services:
+  - type: web
+    name: telegram-forward-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    
+    # Environment variables (set these in Render dashboard)
+    envVars:
+      - key: API_ID
+        sync: false  # Set in Render dashboard
+      - key: API_HASH
+        sync: false  # Set in Render dashboard
+      - key: BOT_TOKEN
+        sync: false  # Set in Render dashboard
+      - key: DATABASE_URL
+        value: sqlite:///bot_database.db
+      - key: LOG_LEVEL
+        value: INFO
+      - key: DELAY_BETWEEN_MESSAGES
+        value: "1.0"
+      - key: MAX_RETRIES
+        value: "3"
+      - key: FLOOD_PROTECT
+        value: "true"
+      - key: STATUS_UPDATE_INTERVAL
+        value: "5"
+      - key: PROGRESS_SAVE_INTERVAL
+        value: "10"
+      - key: SESSION_SAVE_INTERVAL
+        value: "10"
+      - key: MAX_FILE_SIZE_MB
+        value: "2048"
+      - key: CHUNK_SIZE
+        value: "1048576"
+      - key: AUTO_RECONNECT
+        value: "true"
+    
+    # Resource limits (Render free tier)
+    plan: free
+    
+    # Health check (optional)
+    healthCheckPath: /health
+    
+    # Auto-deploy on push to main branch
+    autoDeploy: false  # Set to true for auto-deployment
+
+# Optional: Database disk (for persistent storage)
+disks:
+  - name: bot-storage
+    mountPath: /app/data
+    sizeGB: 1  # Free tier allows 1GB
