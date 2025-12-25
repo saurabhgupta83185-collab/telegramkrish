@@ -26,11 +26,12 @@ from pyrogram.errors import UserDeactivated, ChatWriteForbidden, FloodWait
 from pyrogram.types import Message
 from config import Config, BotState
 from database import db
+from datetime import datetime
+from logger import setup_logging, bot_logger
 
-from handlers.commands import setup_command_handlers
-from handlers.forwarding import setup_forwarding_handler
-from handlers.status import setup_status_handler
-
+from commands import setup_command_handlers
+from forwarding import setup_forwarding_handler
+from status import setup_status_handler
 # Version information
 __version__ = "1.0.0"
 __author__ = "Expert Python Developer"
@@ -49,14 +50,12 @@ class TelegramForwardBot:
         
         # Initialize Pyrogram client
         self.client = Client(
-            "telegram_forward_bot",
-            api_id=Config.API_ID,
-            api_hash=Config.API_HASH,
-            bot_token=Config.BOT_TOKEN,
-            workdir="./sessions",
-            plugins=dict(root="handlers")
-        )
-        
+    "telegram_forward_bot",
+    api_id=Config.API_ID,
+    api_hash=Config.API_HASH,
+    bot_token=Config.BOT_TOKEN,
+    workdir="./sessions"
+)
         # Setup handlers
         self._setup_handlers()
         
