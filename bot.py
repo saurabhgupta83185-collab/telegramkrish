@@ -26,7 +26,7 @@ from pyrogram.errors import UserDeactivated, ChatWriteForbidden, FloodWait
 from pyrogram.types import Message
 from config import Config, BotState
 from database import db
-from utils.logger import setup_logging, bot_logger
+
 from handlers.commands import setup_command_handlers
 from handlers.forwarding import setup_forwarding_handler
 from handlers.status import setup_status_handler
