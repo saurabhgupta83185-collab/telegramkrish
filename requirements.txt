@@ -1,0 +1,30 @@
+# Telegram Forward Bot - Requirements
+# Production-grade dependencies with specific versions for stability
+
+# Core Telegram API client
+pyrogram==2.0.106
+
+# Cryptography for secure sessions
+tgcrypto==1.2.5
+
+# Async SQLite database
+aiosqlite==0.19.0
+
+# Environment variable management
+python-dotenv==1.0.0
+
+# Additional utilities
+asyncio==3.4.3
+
+# Optional: For enhanced performance monitoring
+# psutil==5.9.5
+
+# Optional: For advanced logging
+# loguru==0.7.2
+
+# Development dependencies (optional)
+# pytest==7.4.0
+# pytest-asyncio==0.21.1
+# black==23.7.0
+# flake8==6.0.0
+# mypy==1.5.1
